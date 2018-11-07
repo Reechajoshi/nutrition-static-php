@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Sejal Vora </title>
+	<link rel="stylesheet" href="styles/stylesheet.css" type="text/css" charset="utf-8" />
+	<link rel="stylesheet" href="styles/styles.css.php" type="text/css" charset="utf-8" />
+	
+	<script type='text/javascript'>
+		resize_image = function() {
+				var cw = 877, ch = 505; // original width / height of images
+			//	var cw = 877, ch = 542; //sv_new1_815_504.jpg
+			//  var cw = 815, ch = 504;
+			
+				var winW = 630, winH = 460, pad_cx = 175, pad_cy = 50;
+				
+				try {
+					if (document.body && document.body.offsetWidth) {
+						winW = document.body.offsetWidth;
+						winH = document.body.offsetHeight;
+					}
+					
+					if (document.compatMode=='CSS1Compat' &&
+						document.documentElement &&
+						document.documentElement.offsetWidth ) {
+							winW = document.documentElement.offsetWidth;
+							winH = document.documentElement.offsetHeight;
+					}
+					
+					if (window.innerWidth && window.innerHeight) {
+						winW = window.innerWidth;
+						winH = window.innerHeight;
+					
+						 //alert("in win innerwid/heigh"+winW+""+winH);
+					}			
+					
+					var sv = document.getElementById( 'elm_svlogo' ),
+						winW_org = winW, winH_org=winH;
+						
+					//if(	winW < 750 ) { pad_cx = 25; }
+					//if(	winH < 350 ) { pad_cy = 5; }
+					
+					winW = (winW - (2*pad_cx));					
+					winH = (winH - (2*pad_cy));	
+					
+					//  links are not hidden infront of logo
+					if((winW < 1360) && (winH < 500))
+						left_off = 150;
+					else
+						left_off = 0;
+					
+					var new_cw = cw;
+					if((winW) < cw)
+						new_cw = winW;
+						
+					var nheight = parseInt( new_cw * ( ch / cw ) ),
+						nleft = ((winW_org/2) - (new_cw/2)) - ( (winW_org<1100) ? (0.0681*winW_org) : (0) ) - left_off,
+						ntop = ((winH_org/2) - (nheight/2)) - 35;
+						
+					sv.style.width = new_cw + "px";
+					sv.style.height = nheight + "px";
+					sv.style.left = ( (nleft<0) ? (0) : (nleft) ) + "px";
+					sv.style.top =  ( (ntop<0) ? (0) : (ntop) ) + "px";
+
+					///////////////////////////////////////////////////////////////////////////////////////
+					var sv_lcon = document.getElementById( 'elm_svlkc');
+					sv_lcon.style.left = (winW_org - 355) + "px";
+					sv_lcon.style.top = (winH_org - 320) + "px";		
+				} catch(e) {}
+			};
+			
+			init = function()			
+			{
+				try
+				{
+					var elml = document.getElementById( 'elm_load' );
+					if(elml)
+					{
+						if ( ( iei = navigator.userAgent.indexOf('MSIE') ) !=-1)
+						{
+							//PEACE IE: NO NEED : filter='progid:DXImageTransform.Microsoft.Alpha(Opacity= 
+							elml.parentNode.removeChild(elml);
+						}
+						else
+						{						
+							var sob = 1, sob_end = 0, sob_inc=-0.1;
+							elml.style.opacity = sob; 
+							
+							var interID = setInterval( function() {
+								sob += sob_inc;
+								
+								if(((sob_inc<0)?(sob<=sob_end):(sob>=sob_end)))
+									{ clearInterval(interID); elml.parentNode.removeChild(elml); }
+								else
+									elml.style.opacity = sob;							
+							}, 50 );
+						}
+					}
+				} catch(e) {}
+			}
+	</script>
+</head>
+<body onload="init();resize_image();" onresize="resize_image();" style="overflow: hidden ;">
+<div id=elm_load style="position:absolute;left:0px;top:0px;width:100%;height:100%;z-index:100;background-color:#fff;padding-left:20px;opacity:1"><H3 style='color:#6A6A6A'>Loading...</H3></div>
+
+	<img id='elm_svlogo' style='position:absolute;top:0px;left:0px;' src='images/sv_home2.PNG' />
+
+	<table border=0 id='elm_svlkc' width=350px height=310px style='position:absolute;top:0px;left:0px;width:350px;height:310px'>
+		<tr style="height:30px; line-height:30px;">
+			<td colspan=2 style="padding-left:65px;"><a class=landing-page href="content.php?c=am">about me</a></td>
+		</tr>
+		<tr style="height:30px; line-height:30px;">
+			<td colspan=2 style="padding-left:65px;"><a class=landing-page href="content.php?c=fim">food is medicine</a></td>
+		</tr>
+		<tr style="height:30px; line-height:30px;">
+			<td colspan=2 style="padding-left:40px;"><a class=landing-page href="content.php?c=anp">about naturotherapy</a></td>
+		</tr>
+		<tr style="height:30px; line-height:30px;">
+			<td colspan=2 style="padding-left:0px;"><a class=landing-page href="content.php?c=hoh">holistic healing</a></td>
+		</tr>
+		<tr>
+			<td colspan=2 style="padding-left:70px;"><a class=landing-page href="content.php?c=foi">for individuals</a></td>
+		</tr>
+		<tr><td><div class=gc>
+			<div class=gsc style="padding-left:20px;width:170px"><a class=landing-page href="content.php?c=foc">for corporates</a></div>
+			<div class=gsc style="padding-left:30px;padding-top:15px;width:100px"><a class=landing-page href="#">media</a></div>
+		</div></td></tr>
+		<tr style="height:30px; line-height:35px;">
+			<td style="padding-left:150px;"><a class=landing-page href="#">my blog</a></td>
+		</tr>
+		<tr style="height:30px; line-height:35px;">
+			<td style="padding-left:70px;"><a class=landing-page href="content.php?c=cnm">contact me</a></td>
+		</tr>
+	</table>
+</body>
+</html>
